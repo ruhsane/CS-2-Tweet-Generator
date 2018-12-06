@@ -50,24 +50,52 @@ class LinkedList(object):
 
     def is_empty(self):
         """Return a boolean indicating whether this linked list is empty."""
-        return self.head is None
+        if self.head is None:
+            return True
+        else:
+            return False
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
+        len = 0
+        for item in self.items():
+            len += 1
+        # Running time: O(n) since it is iterating through all the items.
+
+        return len
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
+        NewNode = Node(item)
+        if self.is_empty():
+            self.head = NewNode
+            self.tail = NewNode
+            return
+        else:
+            self.tail.next = NewNode
+            self.tail = NewNode
+        # O(1)  - Change .tail.next and .tail
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
+        NewNode = Node(item)
+
+        if self.is_empty():
+            self.head = NewNode
+            self.tail = NewNode
+        else:
+            NewNode.next = self.head
+            self.head = NewNode
+
+        # O(1) - change .head and .newnode.next
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -75,6 +103,16 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+        node = self.head
+        while node is not None:
+            if quality(node.data) is True:
+                return node.data
+            else:
+                node = node.next
+
+        return None
+        # Best case: 0(1) when the node we are looking for is the head node. it returns after first iterations
+        # Worst case: O(N) when the node we are looking for is the tail node, or is not in the list because it will take whole iterations
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -84,7 +122,50 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
+        node = self.head
+        prev = None
+        word_found = False
 
+        while node is not None:
+            if node.data == item:
+                word_found = True
+                if self.head is node:
+                    self.head = node.next
+                else:
+                    prev.next = node.next
+                if self.tail is node:
+                    self.tail = prev
+                node = None
+                # self.length -= 1
+                return
+            else:
+                prev = node
+                node = node.next
+
+        if word_found == False:
+            raise ValueError('Item not found: {}'.format(item)) # never found item
+
+        # if we are removing the first item:
+        # if HeadVal is not None:
+        #     if HeadVal.data == item:
+        #         self.head = HeadVal.next
+        #         HeadVal = None
+        #         return
+        #
+        # while HeadVal is not None:
+        #     if HeadVal.data == item:
+        #         prev.next=HeadVal.next
+        #         break
+        #     prev = HeadVal
+        #     HeadVal = HeadVal.next
+        #
+        # if HeadVal == None:
+        #     self.tail = prev
+        #     return
+        #
+        # HeadVal = None
+        # Best case: 0(1) when the node we are deleting for is the head node. it returns after first iterations
+        # Worst case: O(N) when the node we are looking for is the tail node, or is not in the list because it will take whole iterations
 
 def test_linked_list():
     ll = LinkedList()
