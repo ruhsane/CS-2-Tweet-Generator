@@ -145,25 +145,6 @@ class LinkedList(object):
         if word_found == False:
             raise ValueError('Item not found: {}'.format(item)) # never found item
 
-        # if we are removing the first item:
-        # if HeadVal is not None:
-        #     if HeadVal.data == item:
-        #         self.head = HeadVal.next
-        #         HeadVal = None
-        #         return
-        #
-        # while HeadVal is not None:
-        #     if HeadVal.data == item:
-        #         prev.next=HeadVal.next
-        #         break
-        #     prev = HeadVal
-        #     HeadVal = HeadVal.next
-        #
-        # if HeadVal == None:
-        #     self.tail = prev
-        #     return
-        #
-        # HeadVal = None
         # Best case: 0(1) when the node we are deleting for is the head node. it returns after first iterations
         # Worst case: O(N) when the node we are looking for is the tail node, or is not in the list because it will take whole iterations
 
