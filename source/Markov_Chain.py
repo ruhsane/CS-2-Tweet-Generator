@@ -11,7 +11,7 @@ def read_file(content):
 def data_structure(words_list):
     words_dict = {}
     for i in range(len(words_list)):
-        # in range of words
+        # loop through every words
         word_found = False
         if words_list[i] in words_dict:
             #word found
@@ -99,7 +99,7 @@ def result_sentence(words_dict):
 if __name__ == "__main__":
     content = read_file("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/source/story.txt")
     data_structure = data_structure(content)
-    # print(data_structure)
+    print(data_structure)
 
     # start = random.choice(list(data_structure))
     # print(start)
