@@ -43,7 +43,7 @@ class Markov(dict):
         final_words_list = [start[0], start[1]]
         sentence_length = 0
         end_not_period = True
-        
+
         while sentence_length < 20 or end_not_period:
             next = Markov.sample_weighted(words_dict, start)
             start = (start[1], next)
@@ -61,7 +61,7 @@ class Markov(dict):
 
 
 if __name__ == "__main__":
-    word_list = Markov.words_list("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/source/story.txt")
+    word_list = Markov.words_list("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/story.txt")
     data_structure = Markov.model(word_list)
     # print(data_structure)
     print(Markov.result_sentence(data_structure))
