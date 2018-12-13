@@ -97,7 +97,7 @@ def result_sentence(words_dict):
     return final_sentence
 
 if __name__ == "__main__":
-    content = read_file("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/source/story.txt")
+    content = read_file("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/source/corpus.txt")
     data_structure = data_structure(content)
     print(data_structure)
 
