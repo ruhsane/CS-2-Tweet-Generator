@@ -61,7 +61,7 @@ class Markov(dict):
 
 
 if __name__ == "__main__":
-    word_list = Markov.words_list("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/story.txt")
+    word_list = Markov.words_list("story.txt")
     data_structure = Markov.model(word_list)
     # print(data_structure)
     print(Markov.result_sentence(data_structure))

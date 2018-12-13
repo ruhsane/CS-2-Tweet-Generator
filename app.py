@@ -3,7 +3,7 @@ import Markov_Chain2
 
 app = Flask(__name__)
 
-app.word_list = Markov_Chain2.Markov.words_list("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/corpus.txt")
+app.word_list = Markov_Chain2.Markov.words_list("story.txt")
 app.markov = Markov_Chain2.Markov.model(app.word_list)
 # print(data_structure)
 
