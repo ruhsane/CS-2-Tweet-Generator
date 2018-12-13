@@ -7,6 +7,7 @@ class Markov(dict):
         """Initialize this histogram as a new dict and count given words. """
         super(Markov, self).__init__()
 
+    @staticmethod
     def words_list(content):
         words = []
         with open(content) as file:
@@ -15,6 +16,7 @@ class Markov(dict):
                     words.append(word)
         return words
 
+    @staticmethod
     def model(words_list):
         markov = {}
         for i in range(len(words_list)-2):
@@ -26,7 +28,7 @@ class Markov(dict):
                 markov[key_tuple] = Dictogram([value]) #create dictionary with tuple key
 
         return markov
-
+    @staticmethod
     def sample_weighted(words_dict, tuple):
         words=[]
         inner_dict = words_dict.get(tuple)
@@ -35,17 +37,28 @@ class Markov(dict):
                 words.append(word) #add the word to the list based on number of its frequency. ex: if fish:4 , add fish to list four times
         return random.choice(words) #randomly choose word from the new list
 
-
+    @staticmethod
     def result_sentence(words_dict):
         start = random.choice(list(words_dict))
-        final_words_list = [start[0]+" "+start[1]]
-
-        for i in range(20):
+        final_words_list = [start[0], start[1]]
+        sentence_length = 0
+        end_not_period = True
+        
+        while sentence_length < 20 or end_not_period:
             next = Markov.sample_weighted(words_dict, start)
             start = (start[1], next)
             final_words_list.append(next)
+
+            if next[-1] == '.':
+                end_not_period = False
+            else:
+                end_not_period = True
+            sentence_length += 1
+
+
         final_sentence = " ".join(final_words_list)
         return final_sentence
+
 
 if __name__ == "__main__":
     word_list = Markov.words_list("/Users/ruhsane/dev/courses/cs1.2/CS-2-Tweet-Generator/source/story.txt")
