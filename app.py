@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import render_template
+
 import Markov_Chain2
 
 app = Flask(__name__)
@@ -8,5 +10,6 @@ app.markov = Markov_Chain2.Markov.model(app.word_list)
 
 @app.route('/')
 def hello_world():
-    return Markov_Chain2.Markov.result_sentence(app.markov)
-    return  render_template("home.html", sentence= markov_model.random_walk(15))
+    # return
+    string = Markov_Chain2.Markov.result_sentence(app.markov).decode('utf-8')
+    return render_template("home.html", sentence = string)
