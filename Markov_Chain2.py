@@ -32,6 +32,7 @@ class Markov(dict):
     def sample_weighted(words_dict, tuple):
         words=[]
         inner_dict = words_dict.get(tuple)
+
         for word in inner_dict: #go into each value,key of dictionary
             for i in range(inner_dict[word]): #take in the value of the word which is the frequency.
                 words.append(word) #add the word to the list based on number of its frequency. ex: if fish:4 , add fish to list four times
@@ -43,12 +44,12 @@ class Markov(dict):
         final_words_list = [start[0], start[1]]
         sentence_length = 0
         end_not_period = True
+        has_follow_up = True
 
         while sentence_length < 20 or end_not_period:
             next = Markov.sample_weighted(words_dict, start)
             start = (start[1], next)
             final_words_list.append(next)
-
             if next[-1] == '.':
                 end_not_period = False
             else:
@@ -64,4 +65,4 @@ if __name__ == "__main__":
     word_list = Markov.words_list("story.txt")
     data_structure = Markov.model(word_list)
     # print(data_structure)
-    print(Markov.result_sentence(data_structure))
+    # print(Markov.result_sentence(data_structure))
