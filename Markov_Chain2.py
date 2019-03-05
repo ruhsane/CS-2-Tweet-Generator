@@ -8,12 +8,17 @@ class Markov(dict):
         super(Markov, self).__init__()
 
     @staticmethod
-    def words_list(content):
+    def words_list_from_file(content):
         words = []
         with open(content) as file:
             for line in file: #for each line of the file
                 for word in line.split(): #split the words
                     words.append(word)
+        return words
+
+    @staticmethod
+    def words_list_from_string(content):
+        words = content.split()
         return words
 
     @staticmethod
